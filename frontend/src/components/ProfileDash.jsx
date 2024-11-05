@@ -1,13 +1,17 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import TimelineComponent from './components/TimelineComponent'
+
+import TimelineComponent from './TimelineComponent'
+
+import Navbar from './Navbar'
 
 
 function ProfileDash() {
   return (
     <div className='w-screen h-screen bg-zinc-900 text-white'>
-      <Navbar/>
-      <TimelineComponent/>
+        <Navbar/>
+      
+        <TimelineComponent/>
+      
     </div>
   )
 }

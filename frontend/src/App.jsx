@@ -1,18 +1,31 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './Login';
-import ProfileDash from './ProfileDash';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import './App.css'
 
-function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<ProfileDash />} />
-            </Routes>
-        </Router>
-    );
+import Home from './components/Home';
+import Login from "./components/Login";
+import ProfileDash from "./components/ProfileDash";
+import Timetable from "./components/Timetable";
+
+
+const router  = createBrowserRouter(
+  [{path:"/", element: <Home/>},
+  {path:"/login",element:<Login/>},
+  {path:'/dashboard', element:<ProfileDash/>},
+{path:'/dashboard/timetable', element:<Timetable/>}]
+
+)
+
+const App = () => {
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  )
 }
 
-export default App;
+export default App
