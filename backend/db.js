@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongoURI = "mongodb://127.0.0.1:27017/webster";
 
-const connectMongo = () => {
+const connectMongo = () => { // connecting the mongoDB
     mongoose.connect(mongoURI)
     .then(() => {
         console.log('mongoDB connected');
@@ -10,4 +10,4 @@ const connectMongo = () => {
         console.log("error: " + err);
     });
 }
-module.exports = connectMongo;
+module.exports = connectMongo; // exporting the function

@@ -2,28 +2,30 @@ const express = require('express');
 const router = express.Router();
 const TimeTable = require('../models/TimeTable');
 
+// get request for time table
 router.get('/timeTable/:email', async (req, res) => {
     try {
         let success = false;
-        const user = await TimeTable.findOne({email: req.params.email});
+        const user = await TimeTable.findOne({email: req.params.email}); // finding if timetable exists
         if(!user) {
             res.status(401).json({message: "You need to create time table first!!"});
         } 
         sucess = true;
-        res.status(201).json({success, user});
+        res.status(201).json({success, user}); // if so returning the time table
     } catch (error) {
         console.log(error);
         res.status(501).json({message: "Sorry, issue on our side"})
     }
 });
 
+// post request for timetable
 router.post('/create/timeTable/:email', async (req, res) => {
     try {
-        const user = await TimeTable.findOne({email: req.params.email});
+        const user = await TimeTable.findOne({email: req.params.email}); // checking if time table exists or not
         if(user) {
             res.status(401).json({message: "You have already created time table please update it instead of recreating it!!"});
         } else {
-            const newUser = {
+            const newUser = { // creating a structure for timetable
                 "email": "",
                 "timeTable": {
                     "monday": {
@@ -100,6 +102,7 @@ router.post('/create/timeTable/:email', async (req, res) => {
                     }
                 }
             };
+            // modifying time table for dbs storage
             console.log(newUser.timeTable.monday["8-9"]);
             newUser.email = req.params.email;
             if(req.body.monday0809) newUser.timeTable.monday["8-9"] = req.body.monday0809;
@@ -168,8 +171,8 @@ router.post('/create/timeTable/:email', async (req, res) => {
             if(req.body.saturday1617) newUser.timeTable.saturday["16-17"] = req.body.saturday1617;
             if(req.body.saturday1718) newUser.timeTable.saturday["17-18"] = req.body.saturday1718;
             
-            await new TimeTable(newUser).save();
-            res.status(201).json(newUser);
+            await new TimeTable(newUser).save(); // saving the timetable to TimeTable
+            res.status(201).json(newUser); // returning the user to client
         }
     } catch (error) {
         console.log(error);
@@ -177,23 +180,24 @@ router.post('/create/timeTable/:email', async (req, res) => {
     }
 });
 
+// update request for the timetable
 router.post('/update/timeTable/:email/:day/:slot', async (req, res) => {
     try {
-        if(!TimeTable.findOne({email: req.params.email})) {
+        if(!TimeTable.findOne({email: req.params.email})) { // if time table not found 
             res.status(401).json({message: "No user time table found"});
         }
         console.log(req.params);
-        const result = await TimeTable.updateOne(
+        const result = await TimeTable.updateOne( // updating rhe time table
             {email: req.params.email},
             {$set: {
                 [`timeTable.${req.params.day}.${req.params.slot}`]: req.body.subject
             }}
         )
-        res.status(201).json(result);
+        res.status(201).json(result); // returning the acknowledgements 
     } catch (error) {
         console.log(error);
         res.status(501).json({message: "It's not you it's us"})
     }
 })
 
-module.exports = router;
+module.exports = router; // exporting the routers

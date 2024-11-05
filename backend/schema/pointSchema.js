@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pointSchema = new mongoose.Schema({
+const pointSchema = new mongoose.Schema({ // creating the pointSchema
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -15,9 +15,13 @@ const pointSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    category: {
+        type: String, 
+        default: "Iron 1"
+    },
     sectional: {
         type: Map,
         of: String
     }
 });
-module.exports = pointSchema;
+module.exports = pointSchema; // export pointSchema

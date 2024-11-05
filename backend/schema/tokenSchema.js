@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const tokenSchema = mongoose.Schema({
+const tokenSchema = mongoose.Schema({ // generating token schema
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId, // foriegn reference to user collection
         required: true,
         ref: "User",
         unique: true
@@ -16,4 +16,4 @@ const tokenSchema = mongoose.Schema({
         expires:3600
     }
 });
-module.exports = tokenSchema
+module.exports = tokenSchema // exporting the token schema
