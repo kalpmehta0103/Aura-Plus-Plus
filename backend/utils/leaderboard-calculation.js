@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Point = require('../models/Point');
 
 const findLeaderboard = (days) => {
@@ -7,14 +6,14 @@ const findLeaderboard = (days) => {
             {
               $sort: { totalPoints: -1 } 
             }
-          ]).exec((err, res) => {
-            if (err) {
-              console.error(err);
-            } else {
-              console.log(res);
-              return res;
-            }
-          });
+          ]).exec()
+          .then((res) => {
+            console.log(res);
+            return res
+        }).catch((err) => {
+            console.log(err);
+            return err;            
+        })
     } else {
         const daysInMiliSecond = days*24*60*60*1000;
         Point.aggregate([
@@ -59,13 +58,14 @@ const findLeaderboard = (days) => {
             {
                 $sort: {inbetweenTimePeriod: -1}
             }
-        ]).exec((err, res) => {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log(res);
-                return res
-            }
+        ]).exec()
+        .then((res) => {
+            console.log(res);
+            return res
+        }).catch((err) => {
+            console.log(err);
+            return err;            
         })
     }
-}
+};
+module.exports = findLeaderboard
