@@ -5,15 +5,17 @@ const User = require('../models/User')
 const cloudinary = require('cloudinary');
 const configCloudinary = require('../utils/cloudinary-config');
 
+// configuiring the cloudinary
 configCloudinary();
 
+// update request for profile
 router.post('/update/:email', upload.single('profilePicture'), async (req, res) => {
     try {
-        let user = await User.findOne({email: req.params.email});
+        let user = await User.findOne({email: req.params.email}); // finding if user exists
         if(!user) {
             res.status(400).json({message: "No user found, Please register!!"});
         } 
-        const newUser = user;
+        const newUser = user; // creating new user for updating the dbs
         if(req.body.name) newUser.name = req.body.name;
         if(req.body.regNo) newUser.regNo = req.body.regNo;
         if(req.body.number) newUser.number = req.body.number;
@@ -21,6 +23,7 @@ router.post('/update/:email', upload.single('profilePicture'), async (req, res) 
         if(req.body.year) newUser.year = req.body.year;
         console.log(req.file);
         if(req.file) {
+            // uploading to cloudinary
             const uploadResult = await cloudinary.uploader
             .upload(
                 req.file.path, {
@@ -34,17 +37,18 @@ router.post('/update/:email', upload.single('profilePicture'), async (req, res) 
             console.log(uploadResult.secure_url);
             newUser.profilePicture = uploadResult.secure_url
             
+            // removing the file created by multer to create disk space
             fs.unlink((req.file.path), (err) => {
                 if(err) console.log(err);
                 else console.log("Deleted File");
             })
         } 
-        user.updateOne({email: req.params.email}, {$set: newUser}, {new: true});
+        user.updateOne({email: req.params.email}, {$set: newUser}, {new: true}); // updating the user
         user.save();
-        res.status(201).json(user)
+        res.status(201).json(user) // returning the user to client
     } catch (error) {
         console.log(error);
         res.status(501).json({message: "It's not you it's us"});
     }
 });
-module.exports = router
+module.exports = router // exporting the router

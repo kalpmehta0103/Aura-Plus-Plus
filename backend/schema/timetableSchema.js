@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const daySchema = new mongoose.Schema({
+const daySchema = new mongoose.Schema({ // creating daySchema
     "8-9": {
         type: String,
         default: ""
@@ -42,7 +42,7 @@ const daySchema = new mongoose.Schema({
     }
 });
 
-const timeTableSchema = new mongoose.Schema({
+const timeTableSchema = new mongoose.Schema({ // creating timeTableSchema
     email: {
         type: String,
         required: true,
@@ -70,4 +70,4 @@ const timeTableSchema = new mongoose.Schema({
     }
 });
 
-module.exports = timeTableSchema;
+module.exports = timeTableSchema; // exporting timeTable schema

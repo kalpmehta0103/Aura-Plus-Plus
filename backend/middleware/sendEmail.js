@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = async (email, subj, text) => {
     try {
+        // authentication for smtp service --> gmail 
         let config = {
             service: "gmail",
             secure: false,
@@ -11,8 +12,10 @@ const sendEmail = async (email, subj, text) => {
             }
         }
         
+        // creating a transporter for transporting the mail
         let transporter = nodemailer.createTransport(config);
         
+        // sending the mail
         await transporter.sendMail({
             from: process.env.MY_EMAIL,
             to: email,
@@ -25,4 +28,4 @@ const sendEmail = async (email, subj, text) => {
         console.log('Email not sent ' + error);
     }
 }
-module.exports = sendEmail;
+module.exports = sendEmail; // exporting the mail
