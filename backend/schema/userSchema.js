@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+
+
 const userSchema = new mongoose.Schema({ // creating the user schema
     email: { 
         type: String,
@@ -30,7 +32,11 @@ const userSchema = new mongoose.Schema({ // creating the user schema
     profilePicture: {
         type: String,
         default: 'https://res.cloudinary.com/dohsbkivm/image/upload/v1730283142/webster/websterProfilevecteezy_user-icon-on-transparent-background_19879186.png.png'
-    }
+    },
+
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }], // Reference to courses
+   
+
 });
 
 module.exports = userSchema; // exporting the user schema

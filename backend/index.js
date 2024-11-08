@@ -6,6 +6,9 @@ const cors = require('cors');
 
 connectMongo();
 
+
+
+
 const app = express();
 app.use(express.json());
 app.set("view engine", "ejs");
@@ -25,6 +28,8 @@ app.use('/leaderboard', require('./routes/leaderboard'));
 app.use('/updateProfile', require('./routes/updateProfile'));
 app.use('/timetable', require('./routes/timetable'));
 app.use('/points', require('./routes/points'))
+app.use('/api/courses',require('./routes/CourseRoutes'));
+app.use('/api/assignments',require('./routes/assignmentRoutes'));
 app.listen(5000, () => {
-    console.log('http://localhost:5000/');
+        console.log('http://localhost:5000/');
 })
