@@ -24,7 +24,7 @@ body {
 .container {
   position: relative;
   width: 800px;
-  height: 650px;
+  height: 800px;
   border: 2px solid #ff2770;
   box-shadow: 0 0 25px #ff2770;
   overflow: hidden;
@@ -294,4 +294,37 @@ body {
 
 .hidden {
    display: none; /* Hide elements with this class */
+}
+
+
+.social-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.social-btn {
+  background-color: #FF2270;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 24px; /* Adjust icon size */
+  transition: background-color 0.3s;
+}
+
+.social-btn:hover {
+  background-color: #FF2270 /* Change color on hover */
+}
+
+.google-btn {
+  color: #db4437; /* Google color */
+}
+
+.github-btn {
+  color: #333; /* GitHub color */
+}
+
+.linkedin-btn {
+  color: #0077b5; /* LinkedIn color */
 }

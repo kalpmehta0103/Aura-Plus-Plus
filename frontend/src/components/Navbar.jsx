@@ -1,6 +1,6 @@
 // Navbar.jsx
 import React from 'react';
-import Logo from './app.png'; // Ensure your logo file path is correct
+import Logo from './logo.png'; // Ensure your logo file path is correct
 import { Link } from 'react-router-dom';
 
 // CSS for the glow animation
@@ -22,14 +22,14 @@ function Navbar() {
       <style>{styles}</style>
       <div className="relative z-10 w-full px-10 py-4 flex justify-between items-center bg-zinc-800 text-white rounded-lg border">
         <div className="logo flex items-center">
-          <img src={Logo} alt="Logo" className="h-20 w-auto mr-4" />
+          <img src={Logo} alt="Logo" className="w-[8vw] h-auto mr-4" />
           
         </div>
         <div className="links flex gap-8">
           <ul className='flex space-x-4'>
             {items.map((item,index)=>(
                 <li key={index}>
-                    <Link to={`${item.toLowerCase()}`} className="text-lg font-medium hover:text-red-500 transition duration-300">
+                    <Link to={`${item.toLowerCase()}`} className="text-lg font-medium hover:text-red-500 transition duration-300 ">
                     {item}
                     </Link>
                 </li>
